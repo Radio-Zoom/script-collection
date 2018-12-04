@@ -1,3 +1,12 @@
+::
+:: This Windows Bathch script can download files via ftp from remote locations and put them into specific folders on the local computer.
+::
+:: @package     
+:: @license     http://www.gnu.org/licenses/agpl.html AGPL Version 3
+:: @author      Malte Schroeder <post@malte-schroeder.de>
+:: @copyright   Copyright (c) 2011-2018 Malte Schroeder (http://www.malte-schroeder.de)
+::
+ 
 @echo off
 :setting
 set _Ver=0.2.9
