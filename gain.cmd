@@ -1,3 +1,11 @@
+::
+:: This Windows Batch script can pass files to mp3gain command line utility.
+::
+:: @package     
+:: @license     http://www.gnu.org/licenses/agpl.html AGPL Version 3
+:: @author      Malte Schroeder <post@malte-schroeder.de>
+:: @copyright   Copyright (c) 2011-2019 Malte Schroeder (http://www.malte-schroeder.de)
+::
 @echo on & setlocal
 :setting
 set _gainerver=1.0.6
