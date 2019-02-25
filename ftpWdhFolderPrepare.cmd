@@ -1,3 +1,12 @@
+::
+:: This Windows Batch script prepares a folder structure year/isoweek/weekday/hour
+::
+:: @package     
+:: @license     http://www.gnu.org/licenses/agpl.html AGPL Version 3
+:: @author      Malte Schroeder <post@malte-schroeder.de>
+:: @copyright   Copyright (c) 2011-2019 Malte Schroeder (http://www.malte-schroeder.de)
+::
+
 @echo off
 setlocal enabledelayedexpansion
 :setting
