@@ -8,3 +8,4 @@ If you are on a Windows Server Version, you may need to install the desktop user
 - Wget http://gnuwin32.sourceforge.net/packages/wget.htm
 - robocopy (available since Windows Vista)
 - GetAllDateTimeInfos.cmd https://administrator.de/wissen/workshop-batch-runaways-part-iii-datums-zeitvariablen-17083.html
+- Some older scripts use blat as the eMail sending tool. https://www.blat.net/ This should be changed to use only one tool.
