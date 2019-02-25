@@ -1,3 +1,12 @@
+::
+:: This Windows Batch script can scan a specific folder by isoweek and prepare the files with ID3 tag and mp3gain for playout.
+::
+:: @package     
+:: @license     http://www.gnu.org/licenses/agpl.html AGPL Version 3
+:: @author      Malte Schroeder <post@malte-schroeder.de>
+:: @copyright   Copyright (c) 2011-2019 Malte Schroeder (http://www.malte-schroeder.de)
+::
+
 @echo off
 setlocal enabledelayedexpansion
 :setting
