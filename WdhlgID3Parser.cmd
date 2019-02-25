@@ -1,3 +1,11 @@
+::
+:: This Windows Bathch script can read the file name and spit it up to write ID3 Tag into an MP3 file.
+::
+:: @package     
+:: @license     http://www.gnu.org/licenses/agpl.html AGPL Version 3
+:: @author      Malte Schroeder <post@malte-schroeder.de>
+:: @copyright   Copyright (c) 2011-2019 Malte Schroeder (http://www.malte-schroeder.de)
+::
 @echo off
 setlocal enabledelayedexpansion
 :setting
