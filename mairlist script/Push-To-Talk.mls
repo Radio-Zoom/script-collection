@@ -1,3 +1,13 @@
+{
+:: This is a mAirlist Script file, that lowers the volume of the first 2 Players of a Playlist. The Default MIC-ON function lowers all Player inputs and does not allow any selection.
+:: This file needs to be registered as a "Background Script" in mAirlist COnfigration.
+:: @package     
+:: @license     http://www.gnu.org/licenses/agpl.html AGPL Version 3
+:: @author      Malte Schroeder <post@malte-schroeder.de>
+:: @copyright   Copyright (c) 2011-2019 Malte Schroeder (http://www.malte-schroeder.de)
+
+}
+
 procedure OnEncoderInputToggle(Input: TEncoderInput; NewState: boolean);  
 begin
   if (Input = eiMic) and (NewState = false) then begin

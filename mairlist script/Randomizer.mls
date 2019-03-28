@@ -1,0 +1,12 @@
+{
+:: This is a mAirlist Script file, Randomizes the active Playlist, except files in Play-State.
+::
+:: @package     
+:: @license     http://www.gnu.org/licenses/agpl.html AGPL Version 3
+:: @author      Malte Schroeder <post@malte-schroeder.de>
+:: @copyright   Copyright (c) 2011-2019 Malte Schroeder (http://www.malte-schroeder.de)
+
+}
+begin
+  CurrentPlaylist.Shuffle;
+end.
