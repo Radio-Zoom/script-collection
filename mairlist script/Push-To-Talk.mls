@@ -1,94 +1,35 @@
 {
 :: This is a mAirlist Script file, that lowers the volume of the first 2 Players of a Playlist. The Default MIC-ON function lowers all Player inputs and does not allow any selection.
-:: This file needs to be registered as a "Background Script" in mAirlist COnfigration.
+:: This file needs to be registered as a "Background Script" in mAirlist Configration.
 :: @package     
 :: @license     http://www.gnu.org/licenses/agpl.html AGPL Version 3
-:: @author      Malte Schroeder <post@malte-schroeder.de>
-:: @copyright   Copyright (c) 2011-2019 Malte Schroeder (http://www.malte-schroeder.de)
+:: @author      Malte Schroeder <post@malte-schroeder.de> & Tondose 
+:: @copyright   Copyright (c) 2011-2019 Malte Schroeder (http://www.malte-schroeder.de) & Tondose (https://community.mairlist.com/u/Tondose)
 
 }
 
+var
+  i, target, delay : integer;
+
 procedure OnEncoderInputToggle(Input: TEncoderInput; NewState: boolean);  
 begin
+target := -12; // set your target duck range here
+delay := 100; // set the delay betwee steps here to smoothen the fade
+
   if (Input = eiMic) and (NewState = false) then begin
-    ExecuteCommand('PLAYER 1-1 VOLUME -12');
-    ExecuteCommand('PLAYER 1-2 VOLUME -12');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -11');
-    ExecuteCommand('PLAYER 1-2 VOLUME -11');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -10');
-    ExecuteCommand('PLAYER 1-2 VOLUME -10');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -9');
-    ExecuteCommand('PLAYER 1-2 VOLUME -9');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -8');
-    ExecuteCommand('PLAYER 1-2 VOLUME -8');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -7');
-    ExecuteCommand('PLAYER 1-2 VOLUME -7');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -6');
-    ExecuteCommand('PLAYER 1-2 VOLUME -6');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -5');
-    ExecuteCommand('PLAYER 1-2 VOLUME -5');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -4');
-    ExecuteCommand('PLAYER 1-2 VOLUME -4');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -3');
-    ExecuteCommand('PLAYER 1-2 VOLUME -3');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -2');
-    ExecuteCommand('PLAYER 1-2 VOLUME -2');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -1');
-    ExecuteCommand('PLAYER 1-2 VOLUME -1');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME 0');
-    ExecuteCommand('PLAYER 1-2 VOLUME 0');
-    
- end
- else if (Input = eiMic) and (NewState = true) then begin
-    ExecuteCommand('PLAYER 1-1 VOLUME 0');
-    ExecuteCommand('PLAYER 1-2 VOLUME 0');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -1');
-    ExecuteCommand('PLAYER 1-2 VOLUME -1');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -2');
-    ExecuteCommand('PLAYER 1-2 VOLUME -2');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -3');
-    ExecuteCommand('PLAYER 1-2 VOLUME -3');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -4');
-    ExecuteCommand('PLAYER 1-2 VOLUME -4');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -5');
-    ExecuteCommand('PLAYER 1-2 VOLUME -5');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -6');
-    ExecuteCommand('PLAYER 1-2 VOLUME -6');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -7');
-    ExecuteCommand('PLAYER 1-2 VOLUME -7');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -8');
-    ExecuteCommand('PLAYER 1-2 VOLUME -8');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -9');
-    ExecuteCommand('PLAYER 1-2 VOLUME -9');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -10');
-    ExecuteCommand('PLAYER 1-2 VOLUME -10');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -11');
-    ExecuteCommand('PLAYER 1-2 VOLUME -11');
-    Sleep(100);
-    ExecuteCommand('PLAYER 1-1 VOLUME -12');
-    ExecuteCommand('PLAYER 1-2 VOLUME -12');   
- end
+    for i := (target) to 0 do
+      begin
+        ExecuteCommand('PLAYER 1-1 VOLUME ' + IntToStr(i));
+        ExecuteCommand('PLAYER 1-2 VOLUME ' + IntToStr(i));
+        Sleep(delay);
+      end;
+  end
+  else if (Input = eiMic) and (NewState = true) then begin
+    for i := 0 downto (target) do
+      begin
+        ExecuteCommand('PLAYER 1-1 VOLUME ' + IntToStr(i));
+        ExecuteCommand('PLAYER 1-2 VOLUME ' + IntToStr(i));
+        Sleep(delay);
+      end;
+  end;
 end;
