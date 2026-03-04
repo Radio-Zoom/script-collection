@@ -1,0 +1,64 @@
+{
+:: This is a mAirlist Script file, that lowers the volume of the first 2 Players of a Playlist by utilizing an "advanced Button GUI Object". The Default MIC-ON function lowers all Player inputs and does not allow any selection.
+:: Based on https://github.com/Radio-Zoom/script-collection/blob/master/mairlist%20script/Push-To-Talk.mls and https://community.mairlist.com/t/scripting-hilfe-zustaende-erfassen-bearbeiten-und-melden/12314 and https://community.mairlist.com/t/scripting-hilfe-sequentielles-schalten/12426
+:: This file needs to be registered as a "Background Script" in mAirlist Configration.
+:: @package     
+:: @license     http://www.gnu.org/licenses/agpl.html AGPL Version 3
+:: @author      Malte Schroeder 
+:: @copyright   Copyright (c) 2026 Malte Schroeder (http://www.malte-schroeder.de)
+::
+:: Usage: 
+:: This script is intended to be used with an Extended button with your mAirlist GUI Settings. You need to ceate that first and give it the Remote-Control ID BUTTON.PTT. 
+:: Make it a simple button, within the settings. Create a Command for "if activated/ clicked", create a command and set it to: PTT-TOGGLE. Activate the status control by script. Set colors of our Choice.
+:: Now add this script as a background script.
+:: If you want to trigger PTT by any hardware remote, like MIDI, Gamepad oder Hotkeys, just add you prefered Hardware remote and also let it send the command PTT-TOGGLE (you have to type that yourself it will not be in the list).
+}
+const
+  max = 2;   							// Maximum Command to toggle
+  
+var
+  k, i, target, delay : integer;
+  Trigger: string;
+  Instruction: array[0..max] of string;
+  
+procedure OnLoad;
+begin
+  target := -12; 						// set your target duck range here
+  delay := 100; 						// set the delay between steps here to smoothen the fade
+  ExecuteCommand('BUTTON.PTT OFF');		// set initial button state
+  Trigger := 'PTT-TOGGLE';    			// command send from mAirlist reomte Control 
+  Instruction[1] := 'PTT-ON';   		
+  Instruction[2] := 'PTT-OFF';
+  k := 1;
+end;
+
+procedure OnExecuteCommand(Command: string);
+begin
+  if (Command = 'PTT-OFF') then begin
+  	ExecuteCommand('BUTTON.PTT OFF');
+    for i := (target) to 0 do
+      begin
+        ExecuteCommand('PLAYER 1-1 VOLUME ' + IntToStr(i));
+        ExecuteCommand('PLAYER 1-2 VOLUME ' + IntToStr(i));
+        Sleep(delay);
+		end;
+  end
+  else if (Command = 'PTT-ON') then begin
+    ExecuteCommand('BUTTON.PTT ON');
+    for i := 0 downto (target) do
+      begin
+        ExecuteCommand('PLAYER 1-1 VOLUME ' + IntToStr(i));
+        ExecuteCommand('PLAYER 1-2 VOLUME ' + IntToStr(i));
+        Sleep(delay);
+      end;
+  end
+  else if (Command = 'PTT-TOGGLE') then begin
+        k := k + 1;
+        if k = max + 1 then
+          k := 1;
+        ExecuteCommand(Instruction[k]);
+  end;
+end;
+
+begin
+end.
